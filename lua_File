@@ -1,1 +1,39 @@
+include "./external_Libraries/premake_Lua/premake_customization/solution_items.lua"
 
+workspace "sunken_Isle"
+	architecture "x86_64"
+	startproject "the_Sunken_Isle"
+
+	configurations
+	{
+		"Debug",
+		"Release",
+		"Dist"
+	}
+
+	solution_items
+	{
+		".editorconfig"
+	}
+
+	flags
+	{
+		"MultiProcessorCompile"
+	}
+
+outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
+
+-- Include directories relative to root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"]      = "%{wks.location}/sunken_Isle/external_Libraries/GLFW/include"
+IncludeDir["Glad"]      = "%{wks.location}/sunken_Isle/external_Libraries/Glad/include"
+IncludeDir["ImGui"]     = "%{wks.location}/sunken_Isle/external_Libraries/imgui"
+IncludeDir["glm"]       = "%{wks.location}/sunken_Isle/external_Libraries/glm"
+
+group "Dependencies"
+	include "external_Libraries/premake_Lua"
+	include "sunken_Isle/external_Libraries/GLFW"
+	include "sunken_Isle/external_Libraries/Glad"
+	include "sunken_Isle/external_Libraries/imgui"
+	include "sunken_Isle/external_Libraries/yaml-cpp"
+group ""
